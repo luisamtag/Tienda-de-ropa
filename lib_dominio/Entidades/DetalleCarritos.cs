@@ -8,5 +8,6 @@ namespace lib_dominio.Entidades
 {
     class DetalleCarritos
     {
+        public class
     }
 }
