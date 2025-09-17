@@ -53,13 +53,7 @@
  
  - Secrets: Click derecho en el proyecto->Manage User Secret 
 - ASP.NET Core Web App (Razor Pages) 
- - No usar: configurar Https 
-
-
- 
-
- 
-
+- No usar: configurar Https 
 - Class Library 
 - MSTest Test Project 
  
