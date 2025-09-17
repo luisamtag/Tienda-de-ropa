@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace lib_dominio.Entidades
 {
-    class TiendaRopa
-    {
-    }
+    public int id { get; set; }
+    
+    public String? nombre { get; set; }
+    public String? apellido { get; set; }
+    public String? correo { get; set; }
+    public String? rol { get; set; }
 }
