@@ -11,9 +11,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Nucleo", "3.Nucleo", "{F7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Pruebas unitarias", "4.Pruebas unitarias", "{58BF9B9E-7538-48B2-9574-7E162061F4CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lib_dominio", "lib_dominio\lib_dominio.csproj", "{448C6380-5D30-4F47-A759-02FBE80DDFDF}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{448C6380-5D30-4F47-A759-02FBE80DDFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448C6380-5D30-4F47-A759-02FBE80DDFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448C6380-5D30-4F47-A759-02FBE80DDFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448C6380-5D30-4F47-A759-02FBE80DDFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{448C6380-5D30-4F47-A759-02FBE80DDFDF} = {F7D624AE-D9CF-463E-B3D9-2E246C47A8E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3568B733-EE93-42EE-8925-AC884C008179}
