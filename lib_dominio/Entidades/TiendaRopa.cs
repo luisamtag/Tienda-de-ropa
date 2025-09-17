@@ -9,7 +9,6 @@ namespace lib_dominio.Entidades
     public class Usuario
     {
         public int id { get; set; }
-
         public String? nombre { get; set; }
         public String? apellido { get; set; }
         public String? correo { get; set; }
