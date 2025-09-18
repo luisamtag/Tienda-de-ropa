@@ -1,11 +1,9 @@
 ﻿using lib_dominio.Nucleo;
-
 namespace ut_presentacion.Nucleo
 {
     public class Configuracion
     {
         private static Dictionary<string, string>? datos = null;
-
         public static string ObtenerValor(string clave)
         {
             string respuesta = "";
@@ -14,7 +12,6 @@ namespace ut_presentacion.Nucleo
             respuesta = datos![clave].ToString();
             return respuesta;
         }
-
         public static void Cargar()
         {
             if (!File.Exists(DatosGenerales.ruta_json))

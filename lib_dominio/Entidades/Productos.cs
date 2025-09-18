@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace lib_dominio.Entidades
 {
    public class Productos
     {
-        public int Id { get; set; }
+        [Key]public int Id { get; set; }
         public int Categoria { get; set; }
         public String? Nombre { get; set; }
         public String? Descripcion { get; set; }

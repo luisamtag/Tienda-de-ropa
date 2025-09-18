@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace lib_dominio.Entidades
 
     public class Pagos
     {
-        public int Id { get; set; }
+        [Key]public int Id { get; set; }
         public string? Venta { get; set; }
         public Decimal Monto { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;

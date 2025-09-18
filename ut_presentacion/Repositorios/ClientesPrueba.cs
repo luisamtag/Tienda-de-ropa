@@ -7,13 +7,13 @@ using ut_presentacion.Nucleo;
 namespace ut_presentacion.Repositorios
 {
     [TestClass]
-    public class UsuariosPrueba
+    public class ClientesPrueba
     {
         private readonly IConexion? iConexion;
-        private List<Usuarios>? lista;
-        private Usuarios? entidad;
+        private List<Clientes>? lista;
+        private Clientes? entidad;
 
-        public UsuariosPrueba()
+        public ClientesPrueba()
         {
             iConexion = new Conexion();
             iConexion.StringConexion = Configuracion.ObtenerValor("StringConexion");
@@ -27,39 +27,33 @@ namespace ut_presentacion.Repositorios
             Assert.AreEqual(true, Listar());
             Assert.AreEqual(true, Borrar());
         }
-
-        public bool Listar()
-        {
-            this.lista = this.iConexion!.Usuarios!.ToList();
-            return lista.Count > 0;
-        }
-
         public bool Guardar()
         {
-            this.entidad = EntidadesNucleo.Usuarios()!;
-
-            this.iConexion!.Usuarios!.Add(this.entidad);
+            this.entidad = EntidadesNucleo.Clientes()!;
+            this.iConexion!.Clientes!.Add(this.entidad);
             this.iConexion!.SaveChanges();
-
             return true;
         }
-
         public bool Modificar()
         {
-            this.entidad!.Nombre = "Sara Lopez";
-
-            var entry = this.iConexion!.Entry<Usuarios>(this.entidad);
+            this.entidad!.Telefono = "999888777";
+            this.entidad.Direccion = "Nueva dirección de prueba";
+            var entry = this.iConexion!.Entry<Clientes>(this.entidad);
             entry.State = EntityState.Modified;
             this.iConexion!.SaveChanges();
-
             return true;
         }
-
+        public bool Listar()
+        {
+            this.lista = this.iConexion!.Clientes!.ToList();
+            return lista.Count > 0;
+        }
         public bool Borrar()
         {
-            this.iConexion!.Usuarios!.Remove(this.entidad!);
+            this.iConexion!.Clientes!.Remove(this.entidad!);
             this.iConexion!.SaveChanges();
             return true;
         }
+
     }
 }

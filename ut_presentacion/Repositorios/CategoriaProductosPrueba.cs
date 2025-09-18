@@ -7,13 +7,13 @@ using ut_presentacion.Nucleo;
 namespace ut_presentacion.Repositorios
 {
     [TestClass]
-    public class UsuariosPrueba
+    public class CategoriaProductosPrueba
     {
         private readonly IConexion? iConexion;
-        private List<Usuarios>? lista;
-        private Usuarios? entidad;
+        private List<CategoriaProductos>? lista;
+        private CategoriaProductos? entidad;
 
-        public UsuariosPrueba()
+        public CategoriaProductosPrueba()
         {
             iConexion = new Conexion();
             iConexion.StringConexion = Configuracion.ObtenerValor("StringConexion");
@@ -27,39 +27,33 @@ namespace ut_presentacion.Repositorios
             Assert.AreEqual(true, Listar());
             Assert.AreEqual(true, Borrar());
         }
-
-        public bool Listar()
-        {
-            this.lista = this.iConexion!.Usuarios!.ToList();
-            return lista.Count > 0;
-        }
-
         public bool Guardar()
         {
-            this.entidad = EntidadesNucleo.Usuarios()!;
-
-            this.iConexion!.Usuarios!.Add(this.entidad);
+            this.entidad = EntidadesNucleo.CategoriaProductos()!;
+            this.iConexion!.CategoriaProductos!.Add(this.entidad);
             this.iConexion!.SaveChanges();
-
             return true;
         }
-
         public bool Modificar()
         {
-            this.entidad!.Nombre = "Sara Lopez";
-
-            var entry = this.iConexion!.Entry<Usuarios>(this.entidad);
+            this.entidad!.Nombre = "Camisetas";
+            this.entidad.Descripcion = "Camisetass para hombre y muje";
+            var entry = this.iConexion!.Entry<CategoriaProductos>(this.entidad);
             entry.State = EntityState.Modified;
             this.iConexion!.SaveChanges();
-
             return true;
         }
-
+        public bool Listar()
+        {
+            this.lista = this.iConexion!.CategoriaProductos!.ToList();
+            return lista.Count > 0;
+        }
         public bool Borrar()
         {
-            this.iConexion!.Usuarios!.Remove(this.entidad!);
+            this.iConexion!.CategoriaProductos!.Remove(this.entidad!);
             this.iConexion!.SaveChanges();
             return true;
         }
+
     }
 }

@@ -15,8 +15,7 @@ namespace lib_dominio.Entidades
     }
     public class Usuarios
     {
-        public int Id { get; set; }
-
+        [Key]public int Id { get; set; }
         public String? Nombre { get; set; }
         public String? Apellido { get; set; }
         public String? Correo { get; set; }
