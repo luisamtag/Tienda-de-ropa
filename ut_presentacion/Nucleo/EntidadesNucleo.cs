@@ -14,9 +14,20 @@ namespace ut_presentacion.Nucleo
         {
             var entidad = new Usuarios();
             entidad.Nombre = "Pruebas-" + DateTime.Now.ToString("yyyyMMddhhmmss");
-            entidad.Pais = "Pruebas-" + DateTime.Now.ToString("yyyyMMddhhmmss");
-
+            
+            entidad.Apellido = "Pruebas";
+            
+            entidad.Correo = "Pruebas";
+            
+            entidad.Contraseña = "Pruebas";
+            
+            entidad.Rol = "no se que poner aqui"; 
+            
             return entidad;
+       
+
+
         }
 
-    }      
+    }
+}
