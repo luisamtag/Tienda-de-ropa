@@ -56,7 +56,7 @@ CREATE TABLE [Productos] (
 CREATE TABLE [CompraProveedores] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Proveedor] INT NOT NULL REFERENCES [Proveedores] ([Id]),
-    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
     [Total] DECIMAL(12,2) NOT NULL,
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE [Ventas] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Cliente] INT NOT NULL REFERENCES [Clientes] ([Id]),
 	[Empleado] INT NOT NULL REFERENCES [Empleados] ([Id]),
-    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
     [Total] DECIMAL(12,2) NOT NULL,
 );
 
@@ -89,13 +89,13 @@ CREATE TABLE [Pagos] (
     [Venta] INT NOT NULL REFERENCES [Ventas] ([Id]),
     [Metodo_pago] NVARCHAR(50) NOT NULL CHECK (metodo_pago IN ('Efectivo', 'Tarjeta_Credito', 'Tarjeta_Debito', 'Transferencia', 'PayPal')),
     [Monto] DECIMAL(12,2) NOT NULL,
-    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 );
 
 CREATE TABLE [Carritos] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Cliente] INT NOT NULL REFERENCES [Clientes] ([Id]),
-    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 );
 
 CREATE TABLE [DetalleCarritos] (
@@ -115,7 +115,7 @@ CREATE TABLE [Inventarios] (
 CREATE TABLE [Devoluciones] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Venta] INT NOT NULL REFERENCES [Ventas] ([Id]),
-    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
     [Motivo] NVARCHAR(500) NOT NULL,
 );
 
