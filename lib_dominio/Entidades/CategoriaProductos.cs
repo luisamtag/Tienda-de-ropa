@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace lib_dominio.Entidades
 {
-    class CategoriaProductos
+    public class CategoriaProductos
     {
+        public int Id { get; set; }
+        public String? Nombre { get; set; }
+        public String? Descripcion { get; set; }
     }
 }

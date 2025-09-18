@@ -1,10 +1,10 @@
 ﻿using Azure;
 using lib_dominio.Entidades;
-using lib_repositorio.Interfaces;
+using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using static lib_dominio.Nucleo.Enumerables;
 
-namespace lib_repositorio.Implementaciones
+namespace lib_repositorios.Implementaciones
 {
     public partial class Conexion : DbContext, IConexion
     {
@@ -13,6 +13,26 @@ namespace lib_repositorio.Implementaciones
         {
             optionsBuilder.UseSqlServer(this.StringConexion!, p => { });
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Usuarios>(entity =>
+            {
+                entity.Property(u => u.Rol)
+                        .IsRequired()
+                        .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Pagos>(entity =>
+            {
+                entity.Property(p => p.Metodo_pago)
+                    .HasConversion<string>()
+                    .HasMaxLength(50);
+            });
+
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Carritos>? Carritos { get; set; }
 

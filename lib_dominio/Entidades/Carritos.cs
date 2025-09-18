@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace lib_dominio.Entidades
 {
-    class Carritos
+   public class Carritos
     {
+        public int Id { get; set; }
+        public int Cliente { get; set; }
+        public int Empleado { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.Now;
     }
 }
