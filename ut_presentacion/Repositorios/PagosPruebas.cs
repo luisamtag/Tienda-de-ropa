@@ -2,18 +2,23 @@
 using lib_repositorios.Implementaciones;
 using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ut_presentacion.Nucleo;
 
 namespace ut_presentacion.Repositorios
 {
     [TestClass]
-    public class CategoriaProductosPrueba
+    public class PagosPruebas
     {
         private readonly IConexion? iConexion;
-        private List<CategoriaProductos>? lista;
-        private CategoriaProductos? entidad;
+        private List<Pagos>? lista;
+        private Pagos? entidad;
 
-        public CategoriaProductosPrueba()
+        public PagosPruebas()
         {
             iConexion = new Conexion();
             iConexion.StringConexion = Configuracion.ObtenerValor("StringConexion");
@@ -27,33 +32,35 @@ namespace ut_presentacion.Repositorios
             Assert.AreEqual(true, Listar());
             Assert.AreEqual(true, Borrar());
         }
-        public bool Guardar()
-        {
-            this.entidad = EntidadesNucleo.CategoriaProductos()!;
-            this.iConexion!.CategoriaProductos!.Add(this.entidad);
-            this.iConexion!.SaveChanges();
-            return true;
-        }
-        public bool Modificar()
-        {
-            this.entidad!.Nombre = "Camisetas";
-            this.entidad.Descripcion = "Camisetass para hombre y mujer";
-            var entry = this.iConexion!.Entry<CategoriaProductos>(this.entidad);
-            entry.State = EntityState.Modified;
-            this.iConexion!.SaveChanges();
-            return true;
-        }
+
         public bool Listar()
         {
-            this.lista = this.iConexion!.CategoriaProductos!.ToList();
+            this.lista = this.iConexion!.Pagos!.ToList();
             return lista.Count > 0;
         }
-        public bool Borrar()
+
+        public bool Guardar()
         {
-            this.iConexion!.CategoriaProductos!.Remove(this.entidad!);
+            this.entidad = EntidadesNucleo.Pagos()!;
+            this.iConexion!.Pagos!.Add(this.entidad);
             this.iConexion!.SaveChanges();
             return true;
         }
 
+        public bool Modificar()
+        {
+            this.entidad!.Monto = 2000000;
+            var entry = this.iConexion!.Entry<Pagos>(this.entidad);
+            entry.State = EntityState.Modified;
+            this.iConexion!.SaveChanges();
+            return true;
+        }
+
+        public bool Borrar()
+        {
+            this.iConexion!.Pagos!.Remove(this.entidad!);
+            this.iConexion!.SaveChanges();
+            return true;
+        }
     }
 }

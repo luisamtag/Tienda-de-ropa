@@ -7,13 +7,13 @@ using ut_presentacion.Nucleo;
 namespace ut_presentacion.Repositorios
 {
     [TestClass]
-    public class CategoriaProductosPrueba
+    public class CarritosPrueba
     {
         private readonly IConexion? iConexion;
-        private List<CategoriaProductos>? lista;
-        private CategoriaProductos? entidad;
+        private List<Carritos>? lista;
+        private Carritos? entidad;
 
-        public CategoriaProductosPrueba()
+        public CarritosPrueba()
         {
             iConexion = new Conexion();
             iConexion.StringConexion = Configuracion.ObtenerValor("StringConexion");
@@ -27,33 +27,39 @@ namespace ut_presentacion.Repositorios
             Assert.AreEqual(true, Listar());
             Assert.AreEqual(true, Borrar());
         }
-        public bool Guardar()
-        {
-            this.entidad = EntidadesNucleo.CategoriaProductos()!;
-            this.iConexion!.CategoriaProductos!.Add(this.entidad);
-            this.iConexion!.SaveChanges();
-            return true;
-        }
-        public bool Modificar()
-        {
-            this.entidad!.Nombre = "Camisetas";
-            this.entidad.Descripcion = "Camisetass para hombre y mujer";
-            var entry = this.iConexion!.Entry<CategoriaProductos>(this.entidad);
-            entry.State = EntityState.Modified;
-            this.iConexion!.SaveChanges();
-            return true;
-        }
+
         public bool Listar()
         {
-            this.lista = this.iConexion!.CategoriaProductos!.ToList();
+            this.lista = this.iConexion!.Carritos!.ToList();
             return lista.Count > 0;
         }
-        public bool Borrar()
+
+        public bool Guardar()
         {
-            this.iConexion!.CategoriaProductos!.Remove(this.entidad!);
+            this.entidad = EntidadesNucleo.Carritos()!;
+
+            this.iConexion!.Carritos!.Add(this.entidad);
             this.iConexion!.SaveChanges();
+
             return true;
         }
 
+        public bool Modificar()
+        {
+            this.entidad!.Cliente = 10;
+
+            var entry = this.iConexion!.Entry<Carritos>(this.entidad);
+            entry.State = EntityState.Modified;
+            this.iConexion!.SaveChanges();
+
+            return true;
+        }
+
+        public bool Borrar()
+        {
+            this.iConexion!.Carritos!.Remove(this.entidad!);
+            this.iConexion!.SaveChanges();
+            return true;
+        }
     }
 }

@@ -66,6 +66,7 @@ namespace ut_presentacion.Nucleo
         public static CompraProveedores? CompraProveedores() 
         {
             var entidad = new CompraProveedores();
+            entidad.Proveedor = 1;
             entidad.Fecha = DateTime.Parse("2024-08-15");
             entidad.Total = 15000000;
             return entidad;
