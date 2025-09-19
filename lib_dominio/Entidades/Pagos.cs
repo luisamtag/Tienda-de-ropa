@@ -20,7 +20,7 @@ namespace lib_dominio.Entidades
     public class Pagos
     {
         [Key]public int Id { get; set; }
-        public string? Venta { get; set; }
+        public int Venta { get; set; }
         public Decimal Monto { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;
         public MetodoP Metodo_pago { get; set; }

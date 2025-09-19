@@ -56,7 +56,7 @@ CREATE TABLE [Productos] (
 CREATE TABLE [CompraProveedores] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Proveedor] INT NOT NULL REFERENCES [Proveedores] ([Id]),
-    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
     [Total] DECIMAL(12,2) NOT NULL,
 );
 
@@ -72,7 +72,7 @@ CREATE TABLE [Ventas] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Cliente] INT NOT NULL REFERENCES [Clientes] ([Id]),
 	[Empleado] INT NOT NULL REFERENCES [Empleados] ([Id]),
-    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
     [Total] DECIMAL(12,2) NOT NULL,
 );
 
@@ -89,13 +89,13 @@ CREATE TABLE [Pagos] (
     [Venta] INT NOT NULL REFERENCES [Ventas] ([Id]),
     [Metodo_pago] NVARCHAR(50) NOT NULL CHECK (metodo_pago IN ('Efectivo', 'Tarjeta_Credito', 'Tarjeta_Debito', 'Transferencia', 'PayPal')),
     [Monto] DECIMAL(12,2) NOT NULL,
-    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
 );
 
 CREATE TABLE [Carritos] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Cliente] INT NOT NULL REFERENCES [Clientes] ([Id]),
-    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
 );
 
 CREATE TABLE [DetalleCarritos] (
@@ -115,7 +115,7 @@ CREATE TABLE [Inventarios] (
 CREATE TABLE [Devoluciones] (
     [Id] INT IDENTITY(1,1) PRIMARY KEY,
     [Venta] INT NOT NULL REFERENCES [Ventas] ([Id]),
-    [Fecha] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
+    [Fecha] DATETIME NOT NULL DEFAULT GETDATE(),
     [Motivo] NVARCHAR(500) NOT NULL,
 );
 
@@ -128,17 +128,17 @@ INSERT INTO [Usuarios]([Nombre], [Apellido], [Correo], [Contraseña], [Rol]) VALU
 ('Luis', 'Martínez', 'luis@email.com', 'pass345', 'Cliente');
 
 -- 2. Tabla Cliente
-INSERT INTO [Clientes] ([Id], [Telefono], [Direccion]) VALUES
-(1, '3001234567', 'Calle 10 #20-30'),
-(3, '3009876543', 'Carrera 15 #25-35'),
-(5, '3157894561', 'Avenida 80 #45-55');
+INSERT INTO [Clientes] ([Usuario],[Telefono], [Direccion]) VALUES
+(1,'3001234567', 'Calle 10 #20-30'),
+(2, '3009876543', 'Carrera 15 #25-35'),
+(3, '3157894561', 'Avenida 80 #45-55');
 
 -- Usuarios adicionales para completar 5 clientes
 INSERT INTO [Usuarios] ([Nombre], [Apellido], [Correo], [Contraseña], [Rol]) VALUES
 ('Sandra', 'Vargas', 'sandra@email.com', 'pass678', 'Cliente'),
 ('Diego', 'Morales', 'diego@email.com', 'pass901', 'Cliente');
 
-INSERT INTO [Clientes] ([Id], [Telefono], [Direccion]) VALUES
+INSERT INTO [Clientes] ([Usuario],[Telefono], [Direccion]) VALUES
 (6, '3201478523', 'Calle 50 #60-70'),
 (7, '3108529637', 'Carrera 30 #40-50');
 
@@ -148,7 +148,7 @@ INSERT INTO [Usuarios] ([Nombre], [Apellido], [Correo], [Contraseña], [Rol]) VAL
 ('Roberto', 'Sánchez', 'roberto@tienda.com', 'emp456', 'Empleado'),
 ('Liliana', 'Ramírez', 'liliana@tienda.com', 'emp789', 'Empleado');
 
-INSERT INTO [Empleados] ([Id], [Cargo], [Salario]) VALUES
+INSERT INTO [Empleados] ([Usuario], [Cargo], [Salario]) VALUES
 (2, 'Vendedor', 1200000),
 (4, 'Gerente', 2500000),
 (8, 'Cajero', 1100000),
@@ -163,7 +163,15 @@ INSERT INTO [CategoriaProductos] ([Nombre], [Descripcion]) VALUES
 ('Accesorios', 'Cinturones y complementos'),
 ('Chaquetas', 'Chaquetas y abrigos');
 
--- 5. Tabla Proveedor
+-- 5. Tabla Producto
+INSERT INTO [Productos] ([Categoria], [Nombre], [Descripcion], [Talla], [Color], [Precio], [Stock]) VALUES
+(1,'Camiseta Básica Cotton' ,'Camiseta de algodón', 'M', 'Blanco', 25000, 50),
+(2,'Jeans Slim Fit Levis' ,'Pantalón jean', '32', 'Azul', 80000, 30),
+(3, 'Tenis Adidas Running','Zapatos para deporte', '42', 'Negro', 150000, 20),
+(4, 'Cinturón Cuero Genuino', 'Cinturón de cuero', 'L', 'Café', 60000, 25),
+(5, 'Chaqueta Bomber', 'Chaqueta moderna', 'XL', 'Gris', 120000, 15);
+
+-- 6. Tabla Proveedor
 INSERT INTO [Proveedores] ([Nombre], [Telefono], [Direccion], [Correo]) VALUES
 ('Textiles SA', '6015551234', 'Zona Industrial 1', 'ventas@textiles.com'),
 ('Moda Ltda', '6015559876', 'Centro Comercial 2', 'info@moda.com'),
@@ -171,16 +179,8 @@ INSERT INTO [Proveedores] ([Nombre], [Telefono], [Direccion], [Correo]) VALUES
 ('Calzado Pro', '6015552345', 'Barrio Centro 4', 'contacto@calzado.com'),
 ('Accesorios Mix', '6015558901', 'Mall Principal 5', 'ventas@accesorios.com');
 
--- 6. Tabla Producto
-INSERT INTO [Productos] ([Id], [Nombre], [Descripcion], [Talla], [Color], [Precio], [Stock]) VALUES
-(1, 'Camiseta Básica', 'Camiseta de algodón', 'M', 'Blanco', 25000, 50),
-(2, 'Jeans Clásico', 'Pantalón jean', '32', 'Azul', 80000, 30),
-(3, 'Tenis Deportivos', 'Zapatos para deporte', '42', 'Negro', 150000, 20),
-(4, 'Cinturón Cuero', 'Cinturón de cuero', 'L', 'Café', 60000, 25),
-(5, 'Chaqueta Casual', 'Chaqueta moderna', 'XL', 'Gris', 120000, 15);
-
 -- 7. Tabla CompraProveedor
-INSERT INTO [CompraProveedores] ([Id], [Fecha], [Total]) VALUES
+INSERT INTO [CompraProveedores] ([Proveedor], [Fecha], [Total]) VALUES
 (1, '2024-08-15', 1500000),
 (2, '2024-08-20', 2000000),
 (3, '2024-08-25', 1800000),
@@ -188,7 +188,7 @@ INSERT INTO [CompraProveedores] ([Id], [Fecha], [Total]) VALUES
 (5, '2024-09-05', 1600000);
 
 -- 8. Tabla DetalleCompra
-INSERT INTO [DetalleCompras] ([Id], [Producto], [Cantidad], [Precio]) VALUES
+INSERT INTO [DetalleCompras] ([CompraProveedor], [Producto], [Cantidad], [Precio]) VALUES
 (1, 1, 50, 20000),
 (2, 2, 30, 70000),
 (3, 3, 20, 130000),
@@ -197,43 +197,43 @@ INSERT INTO [DetalleCompras] ([Id], [Producto], [Cantidad], [Precio]) VALUES
 
 -- 9. Tabla Venta
 INSERT INTO [Ventas] ([Cliente], [Empleado], [Fecha], [Total]) VALUES
-(1, 1, '2024-09-10', 105000),
-(2, 2, '2024-09-11', 80000),
-(3, 3, '2024-09-12', 150000),
-(4, 4, '2024-09-13', 60000),
-(5, 5, '2024-09-14', 120000);
+(2, 1, '2024-09-10', 105000),
+(3, 2, '2024-09-11', 80000),
+(4, 3, '2024-09-12', 150000),
+(5, 4, '2024-09-13', 60000),
+(6, 5, '2024-09-14', 120000);
 
 -- 10. Tabla DetalleVenta
 INSERT INTO [DetalleVentas] ([Venta], [Producto], [Cantidad], [Precio]) VALUES
-(1, 1, 2, 25000),
-(2, 2, 1, 80000),
-(3, 3, 1, 150000),
-(4, 4, 1, 60000),
-(5, 5, 1, 120000);
+(4, 1, 2, 25000),
+(5, 2, 1, 80000),
+(6, 3, 1, 150000),
+(7, 4, 1, 60000),
+(8, 5, 1, 120000);
 
 -- 11. Tabla Pago
 INSERT INTO [Pagos] ([Venta], [Metodo_pago], [Monto], [Fecha]) VALUES
-(1, 'Efectivo', 105000, '2024-09-10'),
-(2, 'Tarjeta_Credito', 80000, '2024-09-11'),
-(3, 'Tarjeta_Debito', 150000, '2024-09-12'),
-(4, 'Transferencia', 60000, '2024-09-13'),
-(5, 'PayPal', 120000, '2024-09-14');
+(4, 'Efectivo', 105000, '2024-09-10'),
+(5, 'Tarjeta_Credito', 80000, '2024-09-11'),
+(6, 'Tarjeta_Debito', 150000, '2024-09-12'),
+(7, 'Transferencia', 60000, '2024-09-13'),
+(8, 'PayPal', 120000, '2024-09-14');
 
 -- 12. Tabla Carrito
 INSERT INTO [Carritos] ([Cliente], [Fecha]) VALUES
-(1, '2024-09-15'),
 (2, '2024-09-15'),
 (3, '2024-09-15'),
 (4, '2024-09-15'),
-(5, '2024-09-15');
+(5, '2024-09-15'),
+(6, '2024-09-15');
 
 -- 13. Tabla DetalleCarrito
 INSERT INTO [DetalleCarritos] ([Carrito],[Producto], [Cantidad]) VALUES
-(1, 1, 2),
-(2, 2, 1),
-(3, 3, 1),
-(4, 4, 3),
-(5, 5, 1);
+(3, 1, 2),
+(4, 2, 1),
+(5, 3, 1),
+(6, 4, 3),
+(7, 5, 1);
 
 -- 14. Tabla Inventario
 INSERT INTO [Inventarios] ([Producto], [Stock_actual], [Stock_minimo]) VALUES
@@ -245,8 +245,8 @@ INSERT INTO [Inventarios] ([Producto], [Stock_actual], [Stock_minimo]) VALUES
 
 -- 15. Tabla Devolucion
 INSERT INTO [Devoluciones] ([Venta], [Fecha], [Motivo]) VALUES
-(1, '2024-09-11', 'Talla incorrecta'),
-(2, '2024-09-12', 'Producto defectuoso'),
-(3, '2024-09-13', 'No le gustó'),
-(4, '2024-09-14', 'Color equivocado'),
-(5, '2024-09-15', 'Llegó tarde');
+(4, '2024-09-11', 'Talla incorrecta'),
+(5, '2024-09-12', 'Producto defectuoso'),
+(6, '2024-09-13', 'No le gustó'),
+(7, '2024-09-14', 'Color equivocado'),
+(8, '2024-09-15', 'Llegó tarde');

@@ -32,6 +32,13 @@ namespace lib_repositorios.Implementaciones
                     .HasMaxLength(50);
             });
 
+            modelBuilder.Entity<Carritos>(entity =>
+            {
+                entity.HasOne(c => c.ClienteNavigation)
+                      .WithMany()
+                      .HasForeignKey(c => c.Cliente);
+            });
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Carritos>? Carritos { get; set; }

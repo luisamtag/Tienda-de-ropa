@@ -24,6 +24,7 @@ namespace ut_presentacion.Nucleo
         public static Clientes? Clientes() 
         {
             var entidad = new Clientes();
+            entidad.Usuario = 1;
             entidad.Telefono = "3001234567";
             entidad.Direccion = "Calle 10 #20-30";
             return entidad;
@@ -100,7 +101,7 @@ namespace ut_presentacion.Nucleo
         public static Pagos? Pagos() 
         {
             var entidad = new Pagos();
-            entidad.Venta = "1";
+            entidad.Venta = 1;
             entidad.Metodo_pago = MetodoP.Efectivo;
             entidad.Monto = 105000;
             entidad.Fecha = DateTime.Parse("2024-09-10");

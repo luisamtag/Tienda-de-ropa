@@ -36,12 +36,17 @@ namespace ut_presentacion.Repositorios
 
         public bool Guardar()
         {
-            this.entidad = EntidadesNucleo.Carritos()!;
 
-            this.iConexion!.Carritos!.Add(this.entidad);
-            this.iConexion!.SaveChanges();
+            this.entidad = new Carritos
+            {
+                Cliente = 2,
+                Fecha = DateTime.Now
+            };
 
-            return true;
+            iConexion.Carritos!.Add(this.entidad);
+            iConexion.SaveChanges();
+
+            return this.entidad.Id > 0;
         }
 
         public bool Modificar()
