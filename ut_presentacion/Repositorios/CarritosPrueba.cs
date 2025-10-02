@@ -39,11 +39,11 @@ namespace ut_presentacion.Repositorios
 
             this.entidad = new Carritos
             {
-                Cliente = 2,
-                Fecha = DateTime.Now
+                Cliente = 1,
+               // Fecha = DateTime.Now
             };
 
-            iConexion.Carritos!.Add(this.entidad);
+            iConexion!.Carritos!.Add(this.entidad);
             iConexion.SaveChanges();
 
             return this.entidad.Id > 0;
@@ -51,7 +51,7 @@ namespace ut_presentacion.Repositorios
 
         public bool Modificar()
         {
-            this.entidad!.Cliente = 10;
+            this.entidad!.Cliente = 2;
 
             var entry = this.iConexion!.Entry<Carritos>(this.entidad);
             entry.State = EntityState.Modified;

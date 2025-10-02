@@ -2,7 +2,8 @@
 using lib_dominio.Entidades;
 using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using static lib_dominio.Nucleo.Enumerables;
+using lib_dominio.Nucleo;
+
 
 namespace lib_repositorios.Implementaciones
 {
@@ -21,8 +22,12 @@ namespace lib_repositorios.Implementaciones
             modelBuilder.Entity<Usuarios>(entity =>
             {
                 entity.Property(u => u.Rol)
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    .HasConversion(
+                        v => v.ToString(), // Enum → string
+                        v => (TipoRol)Enum.Parse(typeof(TipoRol), v) // string → Enum
+                    )
+                    .HasMaxLength(50)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Pagos>(entity =>
@@ -34,7 +39,7 @@ namespace lib_repositorios.Implementaciones
 
             modelBuilder.Entity<Carritos>(entity =>
             {
-                entity.HasOne(c => c.ClienteNavigation)
+                entity.HasOne(c => c.ClienteRef)
                       .WithMany()
                       .HasForeignKey(c => c.Cliente);
             });

@@ -16,6 +16,6 @@ namespace lib_dominio.Entidades
         public int Cantidad { get; set; }
         public Decimal Precio { get; set; }
         [ForeignKey("CompraProveedor")] public CompraProveedores? _CompraProveedor { get; set; }
-        [ForeignKey("Proveedor")] public Proveedores? _Proveedor { get; set; }
+        [ForeignKey("Producto")] public Productos? _producto { get; set; }
     }
 }

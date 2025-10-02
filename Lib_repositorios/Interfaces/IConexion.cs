@@ -2,7 +2,7 @@
 using lib_dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using static lib_dominio.Nucleo.Enumerables;
+using lib_dominio.Nucleo;
 
 namespace lib_repositorios.Interfaces
 {

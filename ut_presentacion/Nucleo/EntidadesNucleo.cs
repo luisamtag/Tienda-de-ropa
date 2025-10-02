@@ -75,6 +75,7 @@ namespace ut_presentacion.Nucleo
         public static DetalleCompras? DetalleCompras() 
         {
             var entidad = new DetalleCompras();
+            entidad.CompraProveedor = 1;
             entidad.Producto = 1;
             entidad.Cantidad = 50;
             entidad.Precio = 20000;
