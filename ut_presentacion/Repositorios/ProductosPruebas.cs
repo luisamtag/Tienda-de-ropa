@@ -40,15 +40,38 @@ public class ProductosPruebas
         return lista.Count > 0;
     }
 
-    public bool Guardar()
-    {
-        this.entidad = EntidadesNucleo.Productos()!;
-        this.iConexion!.Productos!.Add(this.entidad);
-        this.iConexion!.SaveChanges();
-        return true;
-    }
+        public bool Guardar()
+        {
+            // Primero aseguro que haya al menos una categoría en la BD
+            var categoria = this.iConexion!.CategoriaProductos!.FirstOrDefault();
+            if (categoria == null)
+            {
+                // Si no existe, creo una
+                categoria = new CategoriaProductos
+                {
+                    Nombre = "CategoriaPrueba"
+                };
+                this.iConexion!.CategoriaProductos!.Add(categoria);
+                this.iConexion!.CategoriaProductos!.Add(categoria);
+                this.iConexion.SaveChanges();
+            }
 
-    public bool Modificar()
+            // Ahora sí, creo el producto usando esa categoría existente
+            this.entidad = new Productos
+            {
+                Nombre = "Zapatos prueba",
+                Precio = 120000,
+                Stock = 10,
+                Categoria = categoria.Id
+            };
+
+            this.iConexion.Productos!.Add(this.entidad);
+            this.iConexion.SaveChanges();
+
+            return this.entidad.Id > 0;
+        }
+
+        public bool Modificar()
     {
         this.entidad!.Color = "rojo";
         var entry = this.iConexion!.Entry<Productos>(this.entidad);

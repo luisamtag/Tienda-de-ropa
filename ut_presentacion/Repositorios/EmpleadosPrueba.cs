@@ -77,25 +77,25 @@ namespace ut_presentacion.Repositorios
         {
             if (this.entidad != null)
             {
-                var usuario = this.iConexion!.Usuarios!
-                    .FirstOrDefault(u => u.Id == this.entidad.Usuario);
+                // Buscar el usuario relacionado con el empleado
+                var usuario = this.iConexion!.Usuarios!.Find(this.entidad.Usuario);
 
+                // Primero borrar el empleado
+                this.iConexion.Empleados!.Remove(this.entidad);
+
+                // Luego borrar el usuario (si existe)
                 if (usuario != null)
                 {
-                    this.iConexion!.Usuarios.Attach(usuario); 
-                    this.iConexion.Usuarios.Remove(usuario);
+                    this.iConexion.Usuarios!.Remove(usuario);
                 }
 
-                this.iConexion!.Empleados.Attach(this.entidad);
-                this.iConexion.Empleados.Remove(this.entidad);
+                // Guardar cambios
+                this.iConexion.SaveChanges();
+                return true;
             }
 
-            this.iConexion!.SaveChanges();
-            return true;
+            return false;
         }
-
-
-
 
 
     }
