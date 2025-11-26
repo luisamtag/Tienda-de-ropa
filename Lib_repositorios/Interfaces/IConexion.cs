@@ -9,9 +9,7 @@ namespace lib_repositorios.Interfaces
     public interface IConexion
     {
         string? StringConexion { get; set; }
-
         DbSet<Carritos>? Carritos { get; set; }
-
         DbSet<CategoriaProductos>? CategoriaProductos { get; set; }
         DbSet<Clientes>? Clientes { get; set; }
         DbSet<CompraProveedores>? CompraProveedores { get; set; }
@@ -26,9 +24,6 @@ namespace lib_repositorios.Interfaces
         DbSet<Proveedores>? Proveedores { get; set; }
         DbSet<Usuarios>? Usuarios { get; set; }
         DbSet<Ventas>? Ventas { get; set; }
-
-
-
         EntityEntry<T> Entry<T>(T entity) where T : class;
         int SaveChanges();
     }

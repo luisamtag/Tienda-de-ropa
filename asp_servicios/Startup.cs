@@ -28,7 +28,7 @@ namespace asp_servicios
             // Repositorios
             services.AddScoped<IConexion, Conexion>();
             services.AddScoped<ICarritosAplicacion, CarritosAplicacion>();
-            services.AddScoped<ICategoriaProductosAplicacion, CategoriaProdductosAplicacion>();
+            services.AddScoped<ICategoriaProductosAplicacion, CategoriaProductosAplicacion>();
             services.AddScoped<IClientesAplicacion, ClientesAplicacion>();
             // continuar llenado con los repositorios pag44 guia 3.0
             services.AddScoped<TokenAplicacion, TokenAplicacion>();

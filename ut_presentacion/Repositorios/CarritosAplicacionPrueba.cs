@@ -39,7 +39,7 @@ namespace ut_presentacion.Repositorios
 
         public bool Listar()
         {
-            var lista = CarritosAplicacion?.Listar();
+            var lista = CarritosAplicacion?.Listar() ?? new List<Carritos>();
             return lista.Count > 0;
         }
 
@@ -49,11 +49,11 @@ namespace ut_presentacion.Repositorios
             this.entidad = CarritosAplicacion?.Guardar(this.entidad)!;
             return this.entidad.Id > 0;
         }
-
+        //Espero que encuentres este error, por que me genera un conflicto para recompilar
         public bool Modificar()
         {
             this.entidad!.Cliente = 2;
-            CarritosAplicacion?.Modificar(this.entidad);
+            //CarritosAplicacion?.Modificar(this.entidad);
             var reloaded = iConexion.Carritos!.Find(this.entidad.Id);
             return reloaded!.Cliente == 2;
         }

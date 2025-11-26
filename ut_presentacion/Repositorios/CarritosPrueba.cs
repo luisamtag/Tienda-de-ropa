@@ -59,7 +59,7 @@ namespace ut_presentacion.Repositorios
 
             return true;
         }
-
+       
         public bool Borrar()
         {
             this.iConexion!.Carritos!.Remove(this.entidad!);
