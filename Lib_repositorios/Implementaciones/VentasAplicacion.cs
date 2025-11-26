@@ -60,6 +60,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Ventas!.Take(20).ToList();
         }
+        public List<Ventas> PorCliente(Ventas? entidad)
+        {
+            return this.IConexion!.Ventas!
+                .Where(x => x.Cliente == entidad!.Cliente)
+                .Take(20)
+                .ToList();
+        }
 
         public Ventas? Modificar(Ventas? entidad)
         {
