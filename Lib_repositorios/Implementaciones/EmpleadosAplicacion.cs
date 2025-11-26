@@ -57,7 +57,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Empleados!.Take(20).ToList();
         }
-
+        public List<Empleados> PorUsuario(Empleados? entidad)
+        {
+            return this.IConexion!.Empleados!
+                .Where(x => x.Usuario == entidad!.Usuario)
+                .Take(20)
+                .ToList();
+        }
         public Empleados? Modificar(Empleados? entidad)
         {
             if (entidad == null)

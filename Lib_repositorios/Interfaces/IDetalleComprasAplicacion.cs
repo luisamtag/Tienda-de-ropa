@@ -10,6 +10,7 @@ namespace lib_repositorios.Interfaces
     public interface IDetalleComprasAplicacion
     {
         void Configurar(string StringConexion);
+        List<DetalleCompras> PorCompraProveedor(DetalleCompras? entidad);
         List<DetalleCompras> Listar();
         DetalleCompras? Guardar(DetalleCompras? entidad);
         DetalleCompras? Modificar(DetalleCompras? entidad);

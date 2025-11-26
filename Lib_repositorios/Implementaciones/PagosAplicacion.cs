@@ -57,7 +57,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Pagos!.Take(20).ToList();
         }
-
+        public List<Pagos> PorVenta(Pagos? entidad)
+        {
+            return this.IConexion!.Pagos!
+                .Where(x => x.Venta == entidad!.Venta)
+                .Take(20)
+                .ToList();
+        }
         public Pagos? Modificar(Pagos? entidad)
         {
             if (entidad == null)

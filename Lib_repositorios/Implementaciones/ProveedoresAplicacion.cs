@@ -57,7 +57,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Proveedores!.Take(20).ToList();
         }
-
+        public List<Proveedores> PorNombre(Proveedores? entidad)
+        {
+            return this.IConexion!.Proveedores!
+                .Where(x => x.Nombre == entidad!.Nombre)
+                .Take(20)
+                .ToList();
+        }
         public Proveedores? Modificar(Proveedores? entidad)
         {
             if (entidad == null)

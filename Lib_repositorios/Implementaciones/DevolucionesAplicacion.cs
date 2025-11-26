@@ -58,7 +58,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Devoluciones!.Take(20).ToList();
         }
-
+        public List<Devoluciones> PorVenta(Devoluciones? entidad)
+        {
+            return this.IConexion!.Devoluciones!
+                .Where(x => x.Venta == entidad!.Venta)
+                .Take(20)
+                .ToList();
+        }
         public Devoluciones? Modificar(Devoluciones? entidad)
         {
             if (entidad == null)

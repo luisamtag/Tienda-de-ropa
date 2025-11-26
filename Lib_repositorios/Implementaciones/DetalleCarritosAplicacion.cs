@@ -1,5 +1,4 @@
 ﻿using lib_dominio.Entidades;
-
 using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -57,6 +56,13 @@ namespace lib_repositorios.Implementaciones
         public List<DetalleCarritos> Listar()
         {
             return this.IConexion!.DetalleCarritos!.Take(20).ToList();
+        }
+        public List<DetalleCarritos> PorProducto(DetalleCarritos? entidad)
+        {
+            return this.IConexion!.DetalleCarritos!
+                .Where(x => x.Producto == entidad!.Producto)
+                .Take(20)
+                .ToList();
         }
 
         public DetalleCarritos? Modificar(DetalleCarritos? entidad)

@@ -8,12 +8,12 @@ namespace asp_servicios.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class CategoriaProductosController : ControllerBase
+    public class DetalleCarritosController : ControllerBase
     {
-        private ICategoriaProductosAplicacion? iAplicacion = null;
+        private IDetalleCarritosAplicacion? iAplicacion = null;
         private TokenController? tokenController = null;
 
-        public CategoriaProductosController(ICategoriaProductosAplicacion? iAplicacion,
+        public DetalleCarritosController(IDetalleCarritosAplicacion? iAplicacion,
             TokenController tokenController)
         {
             this.iAplicacion = iAplicacion;
@@ -23,11 +23,6 @@ namespace asp_servicios.Controllers
         private Dictionary<string, object> ObtenerDatos()
         {
             var datos = new StreamReader(Request.Body).ReadToEnd().ToString();
-
-
-
-
-
 
             if (string.IsNullOrEmpty(datos))
                 datos = "{}";
@@ -62,7 +57,7 @@ namespace asp_servicios.Controllers
         }
 
         [HttpPost]
-        public string PorNombre()
+        public string PorProducto()
         {
             var respuesta = new Dictionary<string, object>();
             try
@@ -74,12 +69,14 @@ namespace asp_servicios.Controllers
                     return JsonConversor.ConvertirAString(respuesta);
                 }
 
-                var entidad = JsonConversor.ConvertirAObjeto<CategoriaProductos>(
+                var entidad = JsonConversor.ConvertirAObjeto<DetalleCarritos>(
                     JsonConversor.ConvertirAString(datos["Entidad"]));
 
                 this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion"));
-                respuesta["Entidades"] = this.iAplicacion!.PorNombre(entidad);
+                respuesta["Entidades"] = this.iAplicacion!.PorProducto(entidad);
+
                 respuesta["Respuesta"] = "OK";
+
                 respuesta["Fecha"] = DateTime.Now.ToString();
                 return JsonConversor.ConvertirAString(respuesta);
             }
@@ -103,7 +100,7 @@ namespace asp_servicios.Controllers
                     return JsonConversor.ConvertirAString(respuesta);
                 }
 
-                var entidad = JsonConversor.ConvertirAObjeto<CategoriaProductos>(
+                var entidad = JsonConversor.ConvertirAObjeto<DetalleCarritos>(
                     JsonConversor.ConvertirAString(datos["Entidad"]));
 
                 this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion"));
@@ -133,14 +130,7 @@ namespace asp_servicios.Controllers
                     respuesta["Error"] = "lbNoAutenticacion";
                     return JsonConversor.ConvertirAString(respuesta);
                 }
-
-
-
-
-
-
-
-                var entidad = JsonConversor.ConvertirAObjeto<CategoriaProductos>(
+                var entidad = JsonConversor.ConvertirAObjeto<DetalleCarritos>(
                     JsonConversor.ConvertirAString(datos["Entidad"]));
 
                 this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion"));
@@ -171,7 +161,7 @@ namespace asp_servicios.Controllers
                     return JsonConversor.ConvertirAString(respuesta);
                 }
 
-                var entidad = JsonConversor.ConvertirAObjeto<CategoriaProductos>(
+                var entidad = JsonConversor.ConvertirAObjeto<DetalleCarritos>(
                     JsonConversor.ConvertirAString(datos["Entidad"]));
 
                 this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion"));

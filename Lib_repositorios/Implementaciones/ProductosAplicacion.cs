@@ -57,7 +57,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Productos!.Take(20).ToList();
         }
-
+        public List<Productos> PorCategoria(Productos? entidad)
+        {
+            return this.IConexion!.Productos!
+                .Where(x => x.Categoria == entidad!.Categoria)
+                .Take(20)
+                .ToList();
+        }
         public Productos? Modificar(Productos? entidad)
         {
             if (entidad == null)

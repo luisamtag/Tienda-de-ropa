@@ -10,6 +10,7 @@ namespace lib_repositorios.Interfaces
     public interface IProductosAplicacion
     {
         void Configurar(string StringConexion);
+        List<Productos> PorCategoria(Productos? entidad);
         List<Productos> Listar();
         Productos? Guardar(Productos? entidad);
         Productos? Modificar(Productos? entidad);

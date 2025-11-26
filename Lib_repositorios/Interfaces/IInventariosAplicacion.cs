@@ -10,6 +10,7 @@ namespace lib_repositorios.Interfaces
     public interface IInventariosAplicacion
     {
         void Configurar(string StringConexion);
+        List<Inventarios> PorProducto(Inventarios? entidad);
         List<Inventarios> Listar();
         Inventarios? Guardar(Inventarios? entidad);
         Inventarios? Modificar(Inventarios? entidad);

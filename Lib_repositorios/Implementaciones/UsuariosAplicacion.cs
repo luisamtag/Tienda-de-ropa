@@ -60,7 +60,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.Usuarios!.Take(20).ToList();
         }
-
+        public List<Usuarios> PorNombre(Usuarios? entidad)
+        {
+            return this.IConexion!.Usuarios!
+                .Where(x => x.Nombre == entidad!.Nombre)
+                .Take(20)
+                .ToList();
+        }
         public Usuarios? Modificar(Usuarios? entidad)
         {
             if (entidad == null)

@@ -57,7 +57,7 @@ namespace asp_servicios.Controllers
         }
 
         [HttpPost]
-        public string PorCliente()
+        public string PorUsuario()
         {
             var respuesta = new Dictionary<string, object>();
             try

@@ -57,7 +57,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.DetalleVentas!.Take(20).ToList();
         }
-
+        public List<DetalleVentas> PorVenta(DetalleVentas? entidad)
+        {
+            return this.IConexion!.DetalleVentas!
+                .Where(x => x.Venta == entidad!.Venta)
+                .Take(20)
+                .ToList();
+        }
         public DetalleVentas? Modificar(DetalleVentas? entidad)
         {
             if (entidad == null)

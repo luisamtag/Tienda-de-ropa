@@ -10,6 +10,7 @@ namespace lib_repositorios.Interfaces
     public interface IPagosAplicacion
     {
         void Configurar(string StringConexion);
+        List<Pagos> PorVenta(Pagos? entidad);
         List<Pagos> Listar();
         Pagos? Guardar(Pagos? entidad);
         Pagos? Modificar(Pagos? entidad);
