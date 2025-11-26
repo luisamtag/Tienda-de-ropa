@@ -1,20 +1,20 @@
 ﻿using lib_dominio.Entidades;
 using lib_repositorios.Interfaces;
-
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace lib_aplicaciones.Implementaciones
 {
-    public class CategoriaProdductosAplicacion : ICategoriaProductosAplicacion
+    public class CategoriaProductosAplicacion : ICategoriaProductosAplicacion
     {
         private IConexion? IConexion = null;
 
-        public CategoriaProdductosAplicacion(IConexion iConexion)
+        public CategoriaProductosAplicacion(IConexion iConexion)
         {
             this.IConexion = iConexion;
         }
@@ -57,6 +57,14 @@ namespace lib_aplicaciones.Implementaciones
         public List<CategoriaProductos> Listar()
         {
             return this.IConexion!.CategoriaProductos!.Take(20).ToList();
+        }
+
+        public List<CategoriaProductos> PorNombre(CategoriaProductos? entidad)
+        {
+            return this.IConexion!.CategoriaProductos!
+                .Where(x => x.Nombre!.Contains(entidad!.Nombre!))
+                .Take(50)
+                .ToList();
         }
 
         public CategoriaProductos? Modificar(CategoriaProductos? entidad)

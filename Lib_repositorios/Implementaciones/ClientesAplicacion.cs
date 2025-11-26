@@ -59,7 +59,15 @@ namespace lib_repositorios.Implementaciones
         return this.IConexion!.Clientes!.Take(20).ToList();
         }
 
-       public Clientes? Modificar(Clientes? entidad)
+        public List<Clientes> PorUsuario(Clientes? entidad)
+        {
+            return this.IConexion!.Clientes!
+                .Where(x => x.Usuario == entidad!.Usuario)
+                .Take(20)
+                .ToList();
+        }
+
+        public Clientes? Modificar(Clientes? entidad)
        {
         if (entidad == null)
             throw new Exception("lbFaltaInformacion");

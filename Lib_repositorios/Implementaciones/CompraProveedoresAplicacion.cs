@@ -58,6 +58,13 @@ namespace lib_repositorios.Implementaciones
         {
             return this.IConexion!.CompraProveedores!.Take(20).ToList();
         }
+        public List<CompraProveedores> PorProveedor(CompraProveedores? entidad)
+        {
+            return this.IConexion!.CompraProveedores!
+                .Where(x => x.Proveedor == entidad!.Proveedor)
+                .Take(20)
+                .ToList();
+        }
 
         public CompraProveedores? Modificar(CompraProveedores? entidad)
         {

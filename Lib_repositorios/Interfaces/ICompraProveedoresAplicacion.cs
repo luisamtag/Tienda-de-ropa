@@ -10,6 +10,7 @@ namespace lib_repositorios.Interfaces
     public interface ICompraProveedoresAplicacion
     {
         void Configurar(string StringConexion);
+        List<CompraProveedores> PorProveedor(CompraProveedores? entidad);
         List<CompraProveedores> Listar();
         CompraProveedores? Guardar(CompraProveedores? entidad);
         CompraProveedores? Modificar(CompraProveedores? entidad);

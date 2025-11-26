@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace lib_repositorios.Interfaces
     public interface ICarritosAplicacion
     {
         void Configurar(string StringConexion);
+        List<Carritos> PorCliente(Carritos? entidad);
         List<Carritos> Listar();
         Carritos? Guardar(Carritos? entidad);
         Carritos? Modificar(Carritos? entidad);

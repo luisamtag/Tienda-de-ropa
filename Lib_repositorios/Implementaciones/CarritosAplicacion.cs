@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using lib_dominio.Entidades;
+using System.Diagnostics.Metrics;
 
 namespace lib_aplicaciones.Implementaciones
 {
@@ -56,6 +57,14 @@ namespace lib_aplicaciones.Implementaciones
         public List<Carritos> Listar()
         {
             return this.IConexion!.Carritos!.Take(20).ToList();
+        }
+
+        public List<Carritos> PorCliente(Carritos? entidad)
+        {
+            return this.IConexion!.Carritos!
+                .Where(x => x.Cliente == entidad!.Cliente)
+                .Take(20)
+                .ToList();
         }
 
         public Carritos? Modificar(Carritos? entidad)

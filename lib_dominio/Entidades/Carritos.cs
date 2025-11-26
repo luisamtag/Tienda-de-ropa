@@ -12,12 +12,11 @@ namespace lib_dominio.Entidades
     {
         [Key]
         public int Id { get; set; }
-
-        [ForeignKey(nameof(ClienteRef))]
         public int Cliente { get; set; }
 
         public DateTime Fecha { get; set; } = DateTime.Now;
 
+        [ForeignKey(nameof(Cliente))]
         public Clientes ClienteRef { get; set; } = null!;
     }
 }

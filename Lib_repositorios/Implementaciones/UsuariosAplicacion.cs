@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using lib_dominio.Entidades;
-using Lib_repositorios.Interfaces;
 
 namespace lib_repositorios.Implementaciones
 {
