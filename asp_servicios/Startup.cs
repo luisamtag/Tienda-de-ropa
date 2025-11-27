@@ -30,6 +30,30 @@ namespace asp_servicios
             services.AddScoped<ICarritosAplicacion, CarritosAplicacion>();
             services.AddScoped<ICategoriaProductosAplicacion, CategoriaProductosAplicacion>();
             services.AddScoped<IClientesAplicacion, ClientesAplicacion>();
+            services.AddScoped<ICompraProveedoresAplicacion, CompraProveedoresAplicacion>();
+            services.AddScoped<IDetalleCarritosAplicacion, DetalleCarritosAplicacion>();
+            services.AddScoped<IDetalleComprasAplicacion, DetalleComprasAplicacion>();
+            services.AddScoped<IDetalleVentasAplicacion, DetalleVentasAplicacion>();
+            services.AddScoped<IDevolucionesAplicacion, DevolucionesAplicacion>();
+            services.AddScoped<IEmpleadosAplicacion, EmpleadosAplicacion>();
+            services.AddScoped<IInventariosAplicacion, InventariosAplicacion>();
+            services.AddScoped<IPagosAplicacion, PagosAplicacion>();
+            services.AddScoped<IProductosAplicacion, ProductosAplicacion>();
+            services.AddScoped<IProveedoresAplicacion, ProveedoresAplicacion>();
+            services.AddScoped<IUsuariosAplicacion, UsuariosAplicacion>();
+            services.AddScoped<IVentasAplicacion, VentasAplicacion>();
+
+
+
+
+
+
+
+
+
+
+
+
             // continuar llenado con los repositorios pag44 guia 3.0
             services.AddScoped<TokenAplicacion, TokenAplicacion>();
             
