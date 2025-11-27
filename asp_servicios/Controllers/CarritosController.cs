@@ -10,12 +10,12 @@ namespace asp_servicios.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class InstrumentosController : ControllerBase
+    public class CarritosController : ControllerBase
     {
         private ICarritosAplicacion? iAplicacion = null;
         private TokenAplicacion? iAplicacionToken = null;
 
-        public InstrumentosController(ICarritosAplicacion? iAplicacion, TokenAplicacion iAplicacionToken)
+        public CarritosController(ICarritosAplicacion? iAplicacion, TokenAplicacion iAplicacionToken)
         {
             this.iAplicacion = iAplicacion;
             this.iAplicacionToken = iAplicacionToken;
@@ -63,11 +63,11 @@ namespace asp_servicios.Controllers
             try
             {
                 var datos = ObtenerDatos();
-                /*if (!tokenController!.Validate(datos))
+                if (!iAplicacionToken!.Validar(datos))
                 {
                     respuesta["Error"] = "lbNoAutenticacion";
                     return JsonConversor.ConvertirAString(respuesta);
-                }*/
+                }
                 var entidad = JsonConversor.ConvertirAObjeto<Carritos>(
                 JsonConversor.ConvertirAString(datos["Entidad"]));
                 this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion"));
