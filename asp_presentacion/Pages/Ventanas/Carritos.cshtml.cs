@@ -46,7 +46,7 @@ namespace asp_presentacion.Pages.Ventanas
                 Filtro!.Materia = Filtro!.Materia ?? "";
 
                 Accion = Enumerables.Ventanas.Listas;
-                var task = this.iPresentacion!.PorEstudiante(Filtro!);
+                var task = this.iPresentacion!.PorCliente(Filtro!);
                 task.Wait();
                 Lista = task.Result;
                 Actual = null;

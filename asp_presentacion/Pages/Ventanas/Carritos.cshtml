@@ -11,7 +11,7 @@
             @Html.AntiForgeryToken()
 
             <div align="left">
-                <h3>Personas</h3>
+                <h3>Carritos</h3>
             </div>
             <div align="left"
                  class="bt_panel_buttons">
@@ -42,112 +42,33 @@
             {
                 <input type="hidden"
                        asp-for="@Model.Actual!.Id" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.NotaFinal" />
+               
             }
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Nota1" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Nota2" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Nota3" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Nota4" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Nota5" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.NotaFinal" />
+                       asp-for="@Model.Actual!.Cliente" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Fecha" />
+                <input type="hidden"
+                       asp-for="@Model.Actual!.ClienteRef" />
+          
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
-                    <h3>Casa</h3>
+                    <h3>Carritos</h3>
 
                     <div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Estudiante
+                                Cliente
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmEstudiante"
+                                <input id="nmCliente"
                                        class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Estudiante" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Materia
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmMateria"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Materia" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Nota 1
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmNota1"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nota1" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Nota 2
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmNota2"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nota2" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Nota 3
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmNota3"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nota3" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Nota 4
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmNota4"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nota4" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Nota 5
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmNota5"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nota5" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Nota final
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmNotaFinal"
-                                       disabled
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.NotaFinal" />
+                                       asp-for="@Model.Actual!.Cliente" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -160,6 +81,17 @@
                                        asp-for="@Model.Actual!.Fecha" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
+                                ClienteRef
+                            </label>
+                            <div class="col-lg-6">
+                                <input id="nmClienteRef"
+                                       class="cts_forms form-control"
+                                       asp-for="@Model.Actual!.ClienteRef" />
+                            </div>
+                        </div>
+                          
                     </div>
                 </div>
             }
@@ -185,8 +117,8 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Estudiante,
-                                @Model.Actual!.Materia
+                                @Model.Actual!.Cliente
+                             
                             </h6>
                             <br />
                             <br />
@@ -204,12 +136,12 @@
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flNombre"
+                <input id="flCliente"
                        class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Estudiante"
-                       placeholder="Nombre" />
+                       asp-for="@Model.Filtro!.Cliente"
+                       placeholder="Cliente" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
@@ -217,32 +149,18 @@
                     <table class="tb_data table table-striped table-bordered tablehover">
                         <tr>
                             <th>
-                                Estudiante
+                                Id
                             </th>
                             <th>
-                                Materia
+                                Cliente
                             </th>
                             <th class="cl_hidden">
-                                Nota 1
-                            </th>
-                            <th class="cl_hidden">
-                                Nota 2
-                            </th>
-                            <th class="cl_hidden">
-                                Nota 3
-                            </th>
-                            <th class="cl_hidden">
-                                Nota 4
-                            </th>
-                            <th class="cl_hidden">
-                                Nota 5
-                            </th>
-                            <th class="cl_hidden">
-                                Nota final
-                            </th>
-                            <th>
                                 Fecha
                             </th>
+                            <th class="cl_hidden">
+                                ClienteRef
+                            </th>
+                           
                             <th class="cl_actions">
                                 Accion
                             </th>
@@ -253,29 +171,15 @@
                             {
                                 <tr>
                                     <td>
-                                        @elemento.Estudiante
+                                        @elemento.Id
                                     </td>
                                     <td>
-                                        @elemento.Materia
+                                        @elemento.Cliente
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.Nota1
+                                        @elemento.ClienteRef
                                     </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Nota2
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Nota3
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Nota4
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Nota5
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.NotaFinal
-                                    </td>
+                                    
                                     <td>
                                         @elemento.Fecha.ToString("dd/MM/yyyy")
                                     </td>
