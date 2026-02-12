@@ -42,8 +42,8 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
-                Filtro!.Estudiante = Filtro!.Estudiante ?? "";
-                Filtro!.Materia = Filtro!.Materia ?? "";
+                //Filtro!.Cliente = Filtro!.Cliente ?? "";
+                //Filtro!.ClienteRef = Filtro!.ClienteRef ?? "";
 
                 Accion = Enumerables.Ventanas.Listas;
                 var task = this.iPresentacion!.PorCliente(Filtro!);
