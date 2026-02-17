@@ -8,18 +8,18 @@ namespace lib_dominio.Nucleo
             Editar = 1,
             Borrar = 2
         }
-    }
-    public enum TipoRol
-    {
-        Cliente,
-        Empleado,
-        Administrador
-    }
-
-    public enum MetodoP
-    {
+        /*public enum TipoRol
+           {
+               Cliente,
+               Empleado,
+               Administrador
+           }
+        */
+        public enum MetodoP
+      {
         Efectivo,
         Tarjeta,
         Transferencia
+      }
     }
 }
