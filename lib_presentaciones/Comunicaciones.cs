@@ -70,7 +70,12 @@ namespace lib_presentaciones
             {
                 var url = datos["UrlLlave"].ToString();
                 var temp = new Dictionary<string, object>();
-                temp["Entidad"] = "Usuario.6546s5f465sd4f";
+                //temp["Entidad"] = "Usuario.6546s5f465sd4f";
+                temp["Entidad"] = new Dictionary<string, object>()
+                {
+                    { "Nombre", "LuLu" },
+                    { "Contraseña", "KJYgtuidt8f87w4r6ysd" }
+                };
                 var stringData = JsonConversor.ConvertirAString(temp);
 
                 var httpClient = new HttpClient();
