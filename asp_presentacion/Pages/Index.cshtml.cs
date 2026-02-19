@@ -6,16 +6,17 @@ namespace asp_presentacion.Pages
 {
     public class IndexModel : PageModel
     {
-        public bool EstaLogueado = false; 
-        [BindProperty] public string? Email { get; set; }
-        [BindProperty] public string? Contrasena { get; set; }
+        public bool EstaLogueado { get; set; } = false; 
+        [BindProperty] public string? Email { get; set; } = string.Empty;
+        [BindProperty] public string? Contrasena { get; set; } = string.Empty;
+
         public void OnGet() 
         { 
             var variable_session = HttpContext.Session.GetString("Usuario"); 
             if (!String.IsNullOrEmpty(variable_session)) 
             { 
                 EstaLogueado = true; 
-                return; 
+                //return; 
             } 
         }
         public void OnPostBtClean()

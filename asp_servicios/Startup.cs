@@ -1,5 +1,4 @@
 using asp_servicios.Controllers;
-using lib_aplicaciones.Implementaciones;
 using lib_repositorios.Implementaciones;
 using lib_repositorios.Interfaces;
 using Microsoft.AspNetCore.Server.Kestrel.Core;

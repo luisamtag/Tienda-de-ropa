@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lib_aplicaciones.Implementaciones
+namespace lib_repositorios.Implementaciones
 {
     public class CategoriaProductosAplicacion : ICategoriaProductosAplicacion
     {

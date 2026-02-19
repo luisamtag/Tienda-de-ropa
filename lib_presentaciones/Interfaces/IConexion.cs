@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace lib_repositorios.Interfaces
+namespace lib_presentaciones.Interfaces
 {
     public interface IConexion
     {

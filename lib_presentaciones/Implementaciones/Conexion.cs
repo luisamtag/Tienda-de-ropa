@@ -1,9 +1,9 @@
 ﻿using lib_dominio.Entidades;
-using lib_repositorios.Interfaces;
+using lib_presentaciones.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace lib_repositorios.Implementaciones
+namespace lib_presentaciones.Implementaciones
 {
     public partial class Conexion : DbContext, IConexion
     {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using lib_dominio.Entidades;
 using System.Diagnostics.Metrics;
 
-namespace lib_aplicaciones.Implementaciones
+namespace lib_repositorios.Implementaciones
 {
     public class CarritosAplicacion : ICarritosAplicacion
     {

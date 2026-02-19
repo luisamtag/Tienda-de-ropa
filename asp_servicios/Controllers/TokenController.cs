@@ -1,5 +1,6 @@
 ﻿using asp_servicios.Nucleo;
 using Microsoft.AspNetCore.Mvc;
+using lib_repositorios.Interfaces;
 using lib_dominio.Nucleo;
 using lib_dominio.Entidades;
 using lib_repositorios.Implementaciones;
