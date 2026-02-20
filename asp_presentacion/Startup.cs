@@ -12,7 +12,7 @@ namespace asp_presentacion
 
         public static IConfiguration? Configuration { set; get; }
 
-        public void ConfigureServices( IServiceCollection services)
+        public void ConfigureServices(WebApplicationBuilder builder, IServiceCollection services)
         {
             // Presentaciones 
             services.AddScoped<ICarritosPresentacion, CarritosPresentacion>();
@@ -42,7 +42,7 @@ namespace asp_presentacion
 
         public void Configure(WebApplication app, IWebHostEnvironment env)
         {
-            if (!env.IsDevelopment())
+            if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
             }
@@ -52,7 +52,7 @@ namespace asp_presentacion
             app.UseSession();
             app.UseAuthorization();
             app.MapRazorPages();
-            //app.Run();
+            app.Run();
         }
     }
 }

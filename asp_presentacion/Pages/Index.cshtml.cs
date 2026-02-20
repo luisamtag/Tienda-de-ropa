@@ -6,9 +6,9 @@ namespace asp_presentacion.Pages
 {
     public class IndexModel : PageModel
     {
-        public bool EstaLogueado { get; set; } = false; 
-        [BindProperty] public string? Email { get; set; } = string.Empty;
-        [BindProperty] public string? Contrasena { get; set; } = string.Empty;
+        public bool EstaLogueado = false; 
+        [BindProperty] public string? Email { get; set; }
+        [BindProperty] public string? Contrasena { get; set; }
 
         public void OnGet() 
         { 
@@ -16,7 +16,7 @@ namespace asp_presentacion.Pages
             if (!String.IsNullOrEmpty(variable_session)) 
             { 
                 EstaLogueado = true; 
-                //return; 
+                return; 
             } 
         }
         public void OnPostBtClean()
@@ -32,29 +32,35 @@ namespace asp_presentacion.Pages
                 LogConversor.Log(ex, ViewData!); 
             }
         }
-        public void OnPostBtEnter()
+        public IActionResult OnPostBtEnter()
         {
             try
             {
-                if (string.IsNullOrEmpty(Email) && 
-                    string.IsNullOrEmpty(Contrasena)) 
-                { 
-                    OnPostBtClean(); 
-                    return; 
+                if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Contrasena))
+                {
+                    OnPostBtClean();
+                    return Page();
                 }
-                if ("admin.123" != Email + "." + Contrasena) 
-                { 
-                    OnPostBtClean(); 
-                    return; 
+
+                if ("admin.123" != Email + "." + Contrasena)
+                {
+                    OnPostBtClean();
+                    return Page();
                 }
-                ViewData["Logged"] = true;
-                HttpContext.Session.SetString("Usuario", Email!); 
-                EstaLogueado = true; 
-                OnPostBtClean();
+                HttpContext.Session.SetString("Usuario", Email!);
+
+                // REDIRECCIÓN OBLIGATORIA
+                return RedirectToPage("/Index");
+
+                //ViewData["Logged"] = true;
+                //HttpContext.Session.SetString("Usuario", Email!); 
+                //EstaLogueado = true; 
+                //OnPostBtClean();
             }
             catch (Exception ex) 
             { 
-                LogConversor.Log(ex, ViewData!); 
+                LogConversor.Log(ex, ViewData!);
+                return Page();
             }
         }
         public void OnPostBtClose() 

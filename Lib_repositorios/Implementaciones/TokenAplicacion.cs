@@ -33,6 +33,8 @@ namespace lib_repositorios.Implementaciones
         {
             if (!datos.ContainsKey("Llave"))
                 return false;
+            if (string.IsNullOrEmpty(datos["Llave"].ToString()))
+                return false;
             return this.llave == datos["Llave"].ToString();
         }
     }

@@ -3,139 +3,166 @@
 @{
     ViewData["Titulo"] = "";
 }
-<!--Estoy haciendo estos en conjunto, tanto el carritos.cshtml y carritos.cshtml.cs y en la guia voy en la pag 26 -->
-<center>
-    <div>
-        <form method="POST"
-              enctype="multipart/form-data">
-            @Html.AntiForgeryToken()
 
-            <div align="left">
-                <h3>Carritos</h3>
-            </div>
-            <div align="left"
-                 class="bt_panel_buttons">
+<div class="containers_vn">
+
+    <form method="POST" enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+
+        <!-- =====================================================
+             TÍTULO + BOTONES SUPERIORES (Acciones de la ventana)
+             ===================================================== -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h3 class="m-0">Carritos</h3>
+
+            <div class="btn-group">
+
                 <input type="submit"
                        value="Refrescar"
                        asp-page-handler="BtRefrescar"
                        class="btn btn-secondary"
                        disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+
                 <input type="submit"
                        value="Nuevo"
                        asp-page-handler="BtNuevo"
-                       class="btn btn-secondary"
+                       class="btn btn-primary"
                        disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+
                 <input type="submit"
                        value="Guardar"
                        asp-page-handler="BtGuardar"
-                       class="btn btn-secondary"
+                       class="btn btn-primary"
                        disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+
                 <input type="submit"
                        value="Cancelar"
                        asp-page-handler="BtCancelar"
                        class="btn btn-secondary"
                        disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+
             </div>
+        </div>
 
-            @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Id" />
-               
-            }
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Cliente" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Fecha" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.ClienteRef" />
-          
-            }
+        <!-- =====================================================
+             HIDDEN FIELDS (ID + campos necesarios en borrado)
+             ===================================================== -->
+        @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
+        Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+        {
+            <input type="hidden"
+                   asp-for="@Model.Actual!.Id" />
 
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
-            {
-                <div class="containers_vn panel panel-default">
-                    <h3>Carritos</h3>
+        }
+        @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+        {
+            <input type="hidden"
+                   asp-for="@Model.Actual!.Cliente" />
+            <input type="hidden"
+                   asp-for="@Model.Actual!.Fecha" />
+            <input type="hidden"
+                   asp-for="@Model.Actual!.ClienteRef" />
 
-                    <div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Cliente
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmCliente"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Cliente" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Fecha
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmFecha"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Fecha" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                ClienteRef
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmClienteRef"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.ClienteRef" />
-                            </div>
-                        </div>
-                          
-                    </div>
-                </div>
-            }
+        }
 
-            @if (ViewData.ContainsKey("Mensaje"))
-            {
-                <input type="hidden"
-                       asp-for="@Model.Accion" />
-                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
-                ;
-            }
 
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <div class='popup'>
-                    <div class='pp_del_inner'>
-                        <div style='width:95%'>
-                            <h2 align="left">
-                                Mensaje
-                            </h2>
+        <!-- =====================================================
+             MENSAJE EMERGENTE (Errores / Notificaciones)
+             ===================================================== -->
+        @if (ViewData.ContainsKey("Mensaje"))
+        {
+            <input type="hidden" asp-for="@Model.Accion" />
+            @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+        }
 
-                            <h4 align="left">
-                                Desea borrar la entidad?
-                            </h4>
-                            <h6 align="left">
-                                @Model.Actual!.Cliente
-                             
-                            </h6>
-                            <br />
-                            <br />
-                            <input type="submit"
-                                   value="Borrar"
-                                   asp-page-handler="BtBorrar"
-                                   class="btn btn-secondary" />
-                            <input type="submit"
-                                   value="Cerrar"
-                                   asp-page-handler="BtCancelar"
-                                   class="btn btn-secondary" />
+        @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
+        {
+            <div class="containers_vn panel panel-default">
+                <h3>Carritos</h3>
+
+                <div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">
+                            Cliente
+                        </label>
+                        <div class="col-lg-6">
+                            <input id="nmCliente"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Actual!.Cliente" />
                         </div>
                     </div>
-                </div>
-            }
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">
+                            Fecha
+                        </label>
+                        <div class="col-lg-6">
+                            <input id="nmFecha"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Actual!.Fecha" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">
+                            ClienteRef
+                        </label>
+                        <div class="col-lg-6">
+                            <input id="nmClienteRef"
+                                   class="cts_forms form-control"
+                                   asp-for="@Model.Actual!.ClienteRef" />
+                        </div>
+                    </div>
 
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
+                </div>
+            </div>
+        }
+
+        @if (ViewData.ContainsKey("Mensaje"))
+        {
+            <input type="hidden"
+                   asp-for="@Model.Accion" />
+            @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+            ;
+        }
+
+        <!-- =====================================================
+             POPUP DE CONFIRMACIÓN DE BORRADO
+             ===================================================== -->
+        @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+        {
+            <div class='popup'>
+                <div class='pp_del_inner'>
+
+                    <h3 class="text-start">Mensaje</h3>
+
+                    <p class="text-start mt-3">¿Desea borrar la entidad?</p>
+
+                    <h5 class="text-start">
+                        @Model.Actual!.Cliente
+                    </h5>
+
+                    <div class="mt-4 text-center">
+
+                        <input type="submit"
+                               value="Borrar"
+                               asp-page-handler="BtBorrar"
+                               class="btn btn-danger me-2" />
+
+                        <input type="submit"
+                               value="Cancelar"
+                               asp-page-handler="BtCancelar"
+                               class="btn btn-secondary" />
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- =====================================================
+             LISTADO + FILTRO POR CLIENTE
+             ===================================================== -->
+       @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input id="flCliente"
@@ -199,8 +226,8 @@
                             }
                         }
                     </table>
-                </div>
-            }
-        </form>
-    </div>
-</center> 
+                    </div>
+    }
+    </form>
+
+ </div>
